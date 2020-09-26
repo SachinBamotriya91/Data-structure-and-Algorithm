@@ -124,6 +124,29 @@ public class Traversal {
 
     }
 
+    static ArrayList<Integer> path;
+
+    public static boolean find(Node node, int data) {
+        if (node == null) {
+            return false;
+        }
+        if (node.data == data) {
+            path.add(node.data);
+            return true;
+        }
+        boolean flc = find(node.left, data);
+        if (flc) {
+            path.add(node.data);
+            return true;
+        }
+        boolean frc = find(node.right, data);
+        if (frc) {
+            path.add(node.data);
+            return true;
+        }
+        return false;
+    }
+
     public static ArrayList<Integer> nodeToRootPath(Node node, int data) {
         if (node == null) {
             return new ArrayList<Integer>();

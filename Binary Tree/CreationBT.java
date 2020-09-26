@@ -71,6 +71,7 @@ public class CreationBT {
         }
 
         String str = "";
+
         str += node.left == null ? "." : node.left.data;
         str += "<--" + node.data + "-->";
         str += node.right == null ? "." : node.right.data;
@@ -107,9 +108,9 @@ public class CreationBT {
                 null };
         Node root = construct(arr);
         traversal(root);
-        System.out.println(pre);
-        System.out.println(in);
-        System.out.println(post);
+        System.out.println("Pre : " + pre);
+        System.out.println("In : " + in);
+        System.out.println("Post :" + post);
         // display(root);
     }
 }
