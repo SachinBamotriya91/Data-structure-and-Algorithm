@@ -1,7 +1,8 @@
+import java.util.Arrays;
 
 import java.util.Stack;
 
-public class CreationBT {
+public class ViewofBinaryTree {
     static class Node {
         int data;
         Node left;
@@ -104,6 +105,21 @@ public class CreationBT {
 
     }
 
+    static boolean checkLevels[];
+
+    public static void leftView(Node node, int level) {
+        if (node == null) {
+            return;
+        }
+        if (checkLevels[level] != true) {
+            System.out.print(node.data + " ");
+            checkLevels[level] = true;
+        }
+        leftView(node.left, level + 1);
+        leftView(node.right, level + 1);
+
+    }
+
     public static void main(String[] args) {
         Integer arr[] = { 50, 25, 12, null, null, 37, null, 30, null, null, 75, 62, null, 70, null, null, 87, null,
                 null };
@@ -112,7 +128,11 @@ public class CreationBT {
         // System.out.println("Pre : " + pre);
         // System.out.println("In : " + in);
         // System.out.println("Post :" + post);
-
-        display(root);
+        // checkLevels = new ArrayList<>();
+        // Collections.fill(checkLevels, false);
+        // display(root);
+        checkLevels = new boolean[50];
+        Arrays.fill(checkLevels, false);
+        leftView(root, 1);
     }
 }

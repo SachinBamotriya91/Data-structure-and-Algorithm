@@ -80,6 +80,7 @@ public class PrintKLevelDown {
     }
 
     // using recursion following rule of preorder printing
+    // print all nodes of kth level;
     public static void printKLevelsDown1(Node node, int k) {
         if (node == null || k < 0) {
             return;

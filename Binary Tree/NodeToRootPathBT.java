@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class NodeToRootPath {
+public class NodeToRootPathBT {
     public static class Node {
         int data;
         Node left;

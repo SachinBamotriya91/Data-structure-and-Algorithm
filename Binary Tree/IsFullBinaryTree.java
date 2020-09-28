@@ -1,7 +1,8 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Stack;
 
-public class Basics {
+public class IsFullBinaryTree {
     public static class Node {
         int data;
         Node left;
@@ -64,71 +65,23 @@ public class Basics {
         return root;
     }
 
-    public static void display(Node node) {
+    public static boolean isFullBinaryTree(Node node) {
         if (node == null) {
-            return;
+            return true;
+        }
+        if (node.left == null && node.right == null) {
+            return true;
+        } else if (node.left != null && node.right != null) {
+            boolean lr = isFullBinaryTree(node.left);
+            boolean rr = isFullBinaryTree(node.right);
+            if (lr && rr) {
+                return true;
+            }
         }
 
-        String str = "";
-        str += node.left == null ? "." : node.left.data + "";
-        str += " <- " + node.data + " -> ";
-        str += node.right == null ? "." : node.right.data + "";
-        System.out.println(str);
-
-        display(node.left);
-        display(node.right);
+        return false;
     }
 
-    public static int size(Node node) {
-        if (node == null) {
-            return 0;
-        }
-        int size = 0;
-        int lsize = size(node.left);
-        int rsize = size(node.right);
-        size = lsize + rsize + 1;
-        return size;
-    }
-
-    public static int sum(Node node) {
-        if (node == null) {
-            return 0;
-        }
-        int sum = 0;
-        int lsum = sum(node.left);
-        int rsum = sum(node.right);
-        sum = lsum + rsum + node.data;
-        return sum;
-    }
-
-    public static int max(Node node) {
-        if (node == null) {
-            return 0;
-        }
-        int max = Integer.MIN_VALUE;
-
-        int lmax = max(node.left);
-        int rmax = max(node.right);
-        max = Math.max(lmax, rmax);
-        max = Math.max(max, node.data);
-        return max;
-
-    }
-
-    public static int height(Node node) {
-        if (node == null) {
-            return -1;
-        }
-        int ht = -1;
-        int lht = height(node.left);
-        int rht = height(node.right);
-
-        ht = Math.max(lht, rht) + 1;
-        return ht;
-    }
-
-    // 19
-    // 50 25 12 n n 37 n n 75 62 n n 87 n n
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
@@ -143,15 +96,8 @@ public class Basics {
         }
 
         Node root = construct(arr);
-
-        int size = size(root);
-        int sum = sum(root);
-        int max = max(root);
-        int ht = height(root);
-        System.out.println("size = " + size);
-        System.out.println("sum = " + sum);
-        System.out.println("max = " + max);
-        System.out.println("height = " + ht);
+        boolean isfbt = isFullBinaryTree(root);
+        System.out.println("result of isFullBinaryTree :" + isfbt);
     }
 
 }

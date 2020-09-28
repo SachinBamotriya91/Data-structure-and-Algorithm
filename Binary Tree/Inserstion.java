@@ -1,7 +1,8 @@
-
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.Stack;
 
-public class CreationBT {
+public class Inserstion {
     static class Node {
         int data;
         Node left;
@@ -104,15 +105,41 @@ public class CreationBT {
 
     }
 
+    public static void insertion(Node node, int key) {
+        Queue<Node> mq = new ArrayDeque<>();
+        mq.add(node);
+        while (mq.size() > 0) {
+            node = mq.peek();
+            node = mq.remove();
+            if (node.left == null) {
+                Node nn = new Node(key, null, null);
+                node.left = nn;
+                break;
+            } else {
+                mq.add(node.left);
+            }
+            if (node.right == null) {
+                Node nn = new Node(key, null, null);
+                node.right = nn;
+                break;
+            } else {
+                mq.add(node.right);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        Integer arr[] = { 50, 25, 12, null, null, 37, null, 30, null, null, 75, 62, null, 70, null, null, 87, null,
+        Integer arr[] = { 50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null,
                 null };
         Node root = construct(arr);
-        traversal(root);
+        display(root);
+        insertion(root, 1458);
+        // traversal(root);
         // System.out.println("Pre : " + pre);
         // System.out.println("In : " + in);
         // System.out.println("Post :" + post);
-
+        System.out.println("After insertion");
         display(root);
     }
+
 }
